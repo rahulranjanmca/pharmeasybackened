@@ -1,0 +1,29 @@
+server.port: 8087
+
+security.basic.enabled : false
+
+#datasource
+db.driver: com.mysql.jdbc.Driver
+db.url: jdbc:mysql://139.162.55.29:3306/pharmeasy-assignment
+db.username: root
+db.password: RahulPassword
+
+# Hibernate
+hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+hibernate.show_sql: true
+hibernate.hbm2ddl.auto: update
+entitymanager.packagesToScan: in.pharmeasy
+
+#Security 
+
+security.user.name: bar 
+security.user.password: barsecret
+
+
+
+
+accessTokenUrl: http://localhost:8087/
+
+
+
+

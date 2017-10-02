@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<title tiles:fragment="title">Messages : Create</title>
+<title>Login and Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Login and Registration Form" />
+<meta name="keywords"
+	content="html5, css3, form, switch, animation, :target, pseudo-class" />
+<meta name="author" content="Codrops" />
+<!--  <link rel="shortcut icon" href="../favicon.ico"> -->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/cani_style.css" />
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-lg-12 col-md-12">
+			<div class="login-container">
+				<div class="text-center">
+					<h2>
+						<span class="brand-text">Pharm Eesy</span>
+					</h2>
+				</div>
+
+				<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+
+					<div tiles:fragment="content">
+						<form name="f" th:action="@{/login}" method="post">
+							<fieldset>
+								<div th:if="${param.error}" class="alert alert-error">
+									Invalid username and password.</div>
+								<div th:if="${param.logout}" class="alert alert-success">
+									You have been logged out.</div>
+								<div id="login" class="cani_dice_login">
+									<h1>Log in</h1>
+									<div class="form-group">
+										<label class="uname" data-icon="u">Username</label> <input
+											type="text" placeholder="Username"
+											class="form-control input-sm" name="username" />
+									</div>
+
+									<div class="form-group">
+										<label>Password</label> <input type="password"
+											placeholder="Password" class="form-control input-sm"
+											name="password"/>
+									</div>
+									<p class="keeplogin">
+										<input type="checkbox" name="loginkeeping" id="loginkeeping"
+											value="loginkeeping" /> <label for="loginkeeping">Keep
+											me logged in</label>
+									</p>
+
+									<button type="submit" class="btn btn-info float-right">Login</button>
+
+
+
+								</div>
+								<input type="hidden"
+									name="clientCode" th:value="*{clientCode}" /> <input
+									type="hidden" name="client_id" th:value="*{client_id}" /> <input
+									type="hidden" name="redirect_uri" th:value="*{redirect_uri}" />
+
+								
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
