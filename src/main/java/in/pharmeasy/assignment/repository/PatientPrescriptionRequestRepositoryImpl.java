@@ -44,12 +44,12 @@ public class PatientPrescriptionRequestRepositoryImpl extends AbstractRepository
 			predicates.add(cb.equal(p, example.getCreatedBy()));
 		}
 		
-		/*if(example.getAuthorization()!=null)
+		if(example.getAuthorization()!=null)
 		{
 			Path<Authorization> p=root.get("authorization");
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 			predicates.add(cb.equal(p, example.getAuthorization()));
-		}*/
+		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 		
 	}

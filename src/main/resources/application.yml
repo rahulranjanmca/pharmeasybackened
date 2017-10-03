@@ -1,4 +1,4 @@
-server.port: 8087
+server.port: 8092
 
 security.basic.enabled : false
 
@@ -22,7 +22,7 @@ security.user.password: barsecret
 
 
 
-accessTokenUrl: http://localhost:8087/
+accessTokenUrl: http://localhost:8092/
 
 
 

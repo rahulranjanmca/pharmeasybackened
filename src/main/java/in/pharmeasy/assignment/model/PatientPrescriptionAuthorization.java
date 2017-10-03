@@ -6,10 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "patient_prescription_authorization")
+@Table(name = "patient_prescription_authorization",uniqueConstraints = { @UniqueConstraint(columnNames = {  "user_id" ,"prescription_id"}) })
 public class PatientPrescriptionAuthorization extends AbstractEntity {
 
 	/**

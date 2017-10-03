@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,13 +25,15 @@ public class UserRest extends GenericRest<User, User> {
 	public GenericService<User, User> getService() {
 		return userService;
 	}
-	
+
 	@RequestMapping(value = "permissions", method = RequestMethod.GET)
-	public @ResponseBody Set<String> get( Principal principal) {
+	public @ResponseBody Set<String> get(Principal principal) {
 		return userService.getPermissionsById(new Long(principal.getName()));
 	}
-	
 
-
+	@RequestMapping(value = "/me", method = RequestMethod.GET)
+	public @ResponseBody User getMe(Principal principal) {
+		return getService().get(new Long(principal.getName()));
+	}
 
 }

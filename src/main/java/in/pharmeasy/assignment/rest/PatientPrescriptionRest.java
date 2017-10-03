@@ -81,7 +81,7 @@ public class PatientPrescriptionRest extends GenericRest<PatientPrescription, Pa
 	public @ResponseBody List<PatientPrescription> getListByCriteria(@RequestBody PatientPrescription t, @PathVariable("firstResult") int firstResult,
 			@PathVariable("maxResult") int maxResult, Principal principal) {
 		t.setCreatedBy(new Long(principal.getName()));
-		List<PatientPrescription> records= getService().getListByCriteria(t, firstResult, maxResult);
+		List<PatientPrescription> records= getService().getListByCriteria(t, firstResult, maxResult, null, true);
 		if(!"nonauthorized-prescription".equals(t.getType()) &&  !"my-prescription".equals(t.getType()) && !"authorized-prescription".equals(t.getType()))
 			throw new BadRequestException("TYPE IS WRONG");
 		if("nonauthorized-prescription".equals(t.getType()))
@@ -93,6 +93,7 @@ public class PatientPrescriptionRest extends GenericRest<PatientPrescription, Pa
 		}
 		for(PatientPrescription record:records)
 		{
+			record.setPatientPrescriptionRequests(null);
 			record.setDoctorFirstName(record.getDoctor().getFirstName());
 			record.setDoctorLastName(record.getDoctor().getLastName());
 			record.setDoctorEmail(record.getDoctor().getEmail());
@@ -132,7 +133,7 @@ public class PatientPrescriptionRest extends GenericRest<PatientPrescription, Pa
 		}
 		PatientPrescriptionAuthorization patientPrescriptionAuthorization=new PatientPrescriptionAuthorization();
 		patientPrescriptionAuthorization.setPrescriptionId(prescriptionRequest.getPrescriptionId());
-		patientPrescriptionAuthorization.setUserId(new Long(principal.getName()));
+		patientPrescriptionAuthorization.setUserId(prescriptionRequest.getUserId());
 		patientPrescriptionAuthorization.setCreatedBy(new Long(principal.getName()));
 		patientPrescriptionAuthorization.setUpdatedBy(new Long(principal.getName()));
 		patientPrescriptionAuthorization.setCreatedDate(new Date());
@@ -154,6 +155,7 @@ public class PatientPrescriptionRest extends GenericRest<PatientPrescription, Pa
 		}
 		prescriptionRequest.setAuthorization(Authorization.REJECTED);
 		patientPrescriptionRequestService.save(prescriptionRequest);
+		prescriptionRequest.getPatientPrescription().setPatientPrescriptionRequests(null);
 		return prescriptionRequest;
 	}
 

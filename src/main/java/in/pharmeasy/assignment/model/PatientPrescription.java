@@ -100,6 +100,19 @@ public class PatientPrescription extends AbstractEntity {
 	@OneToMany
 	@JoinColumn(name = "prescription_id", insertable = false, updatable = false)
 	List<PatientPrescriptionAuthorization> patientPrescriptionAuthorizations = new ArrayList<PatientPrescriptionAuthorization>();
+	
+	
+	@OneToMany
+	@JoinColumn(name = "prescription_id", insertable = false, updatable = false)
+	List<PatientPrescriptionRequest> patientPrescriptionRequests = new ArrayList<PatientPrescriptionRequest>();
+
+	public List<PatientPrescriptionRequest> getPatientPrescriptionRequests() {
+		return patientPrescriptionRequests;
+	}
+
+	public void setPatientPrescriptionRequests(List<PatientPrescriptionRequest> patientPrescriptionRequests) {
+		this.patientPrescriptionRequests = patientPrescriptionRequests;
+	}
 
 	public Long getId() {
 		return id;
