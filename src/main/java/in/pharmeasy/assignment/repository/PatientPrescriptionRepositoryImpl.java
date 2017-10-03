@@ -60,7 +60,7 @@ public class PatientPrescriptionRepositoryImpl extends AbstractRepositoryImpl<Pa
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 			predicates.add(cb.or(cb.isNull(path),cb.notEqual(path, example.getCreatedBy()) ));
 			
-			/*This is done, so that one you send the request, It should be visbile in you list*/
+			/*This is done, so that one you send the request, It should be visible in you list, Again once patient rejects it the recode will get displayed here to send the request again*/
 			Predicate criteria = cb.conjunction();
 			Join<?, ?> ppr = root.join("patientPrescriptionRequests", JoinType.LEFT);
 			criteria = cb.and(criteria, cb.equal(ppr.get("userId"), example.getCreatedBy()), cb.or(cb.equal(ppr.get("authorization"),Authorization.APPROVED),cb.equal(ppr.get("authorization"),Authorization.PENDING)));
